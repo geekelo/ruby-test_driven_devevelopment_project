@@ -8,6 +8,7 @@ class Solver
         result *= i
       end
     end
+
     result
   end
 end
