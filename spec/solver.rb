@@ -17,14 +17,14 @@ class Solver
   end
 
   def fizzbuzz(num)
-    if  num % 3 == 0 &&  num % 5 == 0
-      return 'fizzbuzz'
+    if num % 3 == 0 && num % 5 == 0
+      'fizzbuzz'
     elsif num % 5 == 0
-      return 'buzz'
+      'buzz'
     elsif num % 3 == 0
-      return 'fizz'
+      'fizz'
     else
-      return num.to_s
+      num.to_s
     end
   end
 end
