@@ -16,5 +16,7 @@ class TestSolver < Minitest::Test
     end
   end
 
-
+  def test_reverse
+    assert_equal "olleh", @solver.factorial("hello")
+  end
 end
