@@ -1,30 +1,31 @@
 class Solver
   def factorial(num)
-    result = 1
-    if num < 0
-      raise ArgumentError, 'You must input positive numbers only'
-    elsif num > 0
-      (1..num).each do |i|
-        result *= i
-      end
-    end
+    raise 'Factorial is not defined for negative numbers' if num.negative?
 
+    result = 1
+    (1..num).each do |i|
+      result *= i
+    end
     result
   end
 
-  def reverse(word)
-    word.reverse
+  def fizzbuzz(number)
+    result = []
+
+    (1..number).each do |i|
+      result << if (i % 3).zero? && (i % 5).zero?
+                  'FizzBuzz'
+                elsif (i % 3).zero?
+                  'Fizz'
+                elsif (i % 5).zero?
+                  'Buzz'
+                else
+                  i
+                end
+    end
   end
 
-  def fizzbuzz(num)
-    if num % 3 == 0 && num % 5 == 0
-      'fizzbuzz'
-    elsif num % 5 == 0
-      'buzz'
-    elsif num % 3 == 0
-      'fizz'
-    else
-      num.to_s
-    end
+  def reverse(str)
+    str.reverse
   end
 end

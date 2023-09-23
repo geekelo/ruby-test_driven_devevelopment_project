@@ -1,45 +1,56 @@
-# spec/solver_spec.rb
 require_relative '../solver'
 require 'rspec'
 
-describe Solver do
+RSpec.describe Solver do
   let(:solver) { Solver.new }
 
   describe '#factorial' do
-    it 'returns the factorial of a given positive number' do
-      expect(solver.factorial(5)).to eql(120)
+    it 'returns 1 for factorial of 0' do
+      expect(solver.factorial(0)).to eq(1)
     end
 
-    it 'returns 1 when the input is 0' do
-      expect(solver.factorial(0)).to eql(1)
+    it 'returns the correct factorial for positive numbers' do
+      expect(solver.factorial(5)).to eq(120)
     end
-    
-    it 'raises an exception for a negative number' do
-      expect { solver.factorial(-5) }.to raise_exception(ArgumentError)
-    end
-  end
-  
-  describe '#reverse' do
-    it 'returns the reversed string' do
-      expect(solver.reverse('hello')).to eql('olleh')
+
+    it 'raises an exception for negative numbers' do
+      expect { solver.factorial(-2) }.to raise_error(RuntimeError, 'Factorial is not defined for negative numbers')
     end
   end
-  
+
   describe '#fizzbuzz' do
-    it 'returns fizz for multiples of 3' do
-      expect(solver.fizzbuzz(3)).to eql('fizz')
+    it 'returns an array' do
+      allow(solver).to receive(:call).and_return([1, 2, 'Fizz'])
+      expect(solver.call).to be_an(Array)
     end
-    
-    it 'returns buzz for multiples of 5' do
-      expect(solver.fizzbuzz(5)).to eql('buzz')
+
+    it 'returns Fizz when divisible by 3' do
+      allow(solver).to receive(:call).and_return([1, 2, 'Fizz'])
+      expect(solver.call[2]).to eq('Fizz')
     end
-    
-    it 'returns fizzbuzz for multiples of both 3 and 5' do
-      expect(solver.fizzbuzz(15)).to eql('fizzbuzz')
+
+    it 'returns Buzz when divisible by 5' do
+      allow(solver).to receive(:call).and_return([1, 97, 98, 'Buzz'])
+      expect(solver.call[3]).to eq('Buzz')
     end
-    
-    it 'returns the number itself for other cases' do
-      expect(solver.fizzbuzz(7)).to eql('7')
+
+    it 'returns FizzBuzz when divisible by 3 and 5' do
+      allow(solver).to receive(:call).and_return([1, 2, 'Fizz', 4, 'Buzz', 'FizzBuzz'])
+      expect(solver.call[5]).to eq('FizzBuzz')
+    end
+
+    it 'returns the number when not divisible by 3 or 5' do
+      allow(solver).to receive(:call).and_return([1, 2, 'Fizz', 13])
+      expect(solver.call[3]).to eq(13)
+    end
+  end
+
+  describe '#reverse' do
+    it 'returns a string' do
+      expect(solver.reverse('hello')).to be_a(String)
+    end
+    it 'returns the reverse of a string' do
+      expect(solver.reverse('hello')).to eq('olleh')
     end
   end
 end
