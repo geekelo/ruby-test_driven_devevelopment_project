@@ -9,4 +9,12 @@ class TestSolver < Minitest::Test
     assert_equal 6, @solver.factorial(3)
     assert_equal 1, @solver.factorial(0)
   end
+
+  def test_factorial_negative_num
+    assert_raises ArgumentError do
+      @solver.factorial(-3)
+    end
+  end
+
+
 end
