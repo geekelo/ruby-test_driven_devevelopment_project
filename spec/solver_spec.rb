@@ -1,31 +1,45 @@
-require 'minitest/autorun'
-require_relative 'solver'
+# spec/solver_spec.rb
+require_relative '../solver'
+require 'rspec'
 
-class TestSolver < Minitest::Test
-  def setup
-    @solver = Solver.new
-  end
+describe Solver do
+  let(:solver) { Solver.new }
 
-  def test_factorial_positive_num
-    assert_equal 6, @solver.factorial(3)
-    assert_equal 1, @solver.factorial(0)
-  end
+  describe '#factorial' do
+    it 'returns the factorial of a given positive number' do
+      expect(solver.factorial(5)).to eql(120)
+    end
 
-  def test_factorial_negative_num
-    assert_raises ArgumentError do
-      @solver.factorial(-3)
+    it 'returns 1 when the input is 0' do
+      expect(solver.factorial(0)).to eql(1)
+    end
+    
+    it 'raises an exception for a negative number' do
+      expect { solver.factorial(-5) }.to raise_exception(ArgumentError)
     end
   end
-
-  def test_reverse
-    assert_equal 'olleh', @solver.reverse('hello')
-    assert_equal '', @solver.reverse('')
+  
+  describe '#reverse' do
+    it 'returns the reversed string' do
+      expect(solver.reverse('hello')).to eql('olleh')
+    end
   end
-
-  def test_fizzbuzz
-    assert_equal '1', @solver.fizzbuzz(1)
-    assert_equal 'fizz', @solver.fizzbuzz(3)
-    assert_equal 'buzz', @solver.fizzbuzz(5)
-    assert_equal 'fizzbuzz', @solver.fizzbuzz(15)
+  
+  describe '#fizzbuzz' do
+    it 'returns fizz for multiples of 3' do
+      expect(solver.fizzbuzz(3)).to eql('fizz')
+    end
+    
+    it 'returns buzz for multiples of 5' do
+      expect(solver.fizzbuzz(5)).to eql('buzz')
+    end
+    
+    it 'returns fizzbuzz for multiples of both 3 and 5' do
+      expect(solver.fizzbuzz(15)).to eql('fizzbuzz')
+    end
+    
+    it 'returns the number itself for other cases' do
+      expect(solver.fizzbuzz(7)).to eql('7')
+    end
   end
 end
