@@ -1,7 +1,6 @@
 require_relative '../solver'
-require 'rspec'
 
-RSpec.describe Solver do
+describe Solver do
   let(:solver) { Solver.new }
 
   describe '#factorial' do
